@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ticTacCPU
+comment1.params=
+comment1.target=ticTacCPU()
+comment2.params=
+comment2.target=boolean\ checkX()
+comment3.params=
+comment3.target=boolean\ checkO()
+comment4.params=
+comment4.target=boolean\ stop()
+comment5.params=
+comment5.target=void\ fillBoard()
+comment6.params=
+comment6.target=void\ screenOutput()
+comment7.params=c
+comment7.target=void\ change(int)
+numComments=8
