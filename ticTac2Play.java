@@ -15,6 +15,7 @@ public class ticTac2Play{
     }
 
     public void sortMenu(){
+        
         String choice;
         String print;
         fillBoard();
@@ -220,7 +221,7 @@ public class ticTac2Play{
             } while (stop());
         }
     }
-
+   
     private boolean checkX(){
 
         //row 1
@@ -257,7 +258,11 @@ public class ticTac2Play{
         }
         return false;
     }
-
+    public void createArray(){
+        String choice = console.next()+" ";
+        int n = Integer.parseInt(choice.substring(0,choice.indexOf(" ")));
+        board = new String [n][n];
+    }
     private boolean checkO(){
         //row 1
         if((board[0][0].equals("O"))&& (board[0][1].equals("O")&&(board[0][1].equals("O")))){
@@ -314,7 +319,7 @@ public class ticTac2Play{
         if (checkO()){
 
             System.out.println("Game Over: Player 2 wins!");
-            System.out.println("Do you want to play again? If yes, enter 1. If not enter 2.");
+            System.out.println("Do you want to play again?  If yes, two player method, enter 1. If computer, enter 2.");
             fillBoard();
                 String choice = console.next() + " ";
                 if(choice.equals(1+"")){
