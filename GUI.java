@@ -16,8 +16,8 @@ public class GUI extends JFrame implements ActionListener
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
     mnuExit = new JMenuItem("    Quit");
 
-    JButton btnEmpty[] = new JButton[17];
-
+    JButton btnEmpty[] = new JButton[10];
+    String board[][]= new String [3][3];
     JPanel  pnlNewGame = new JPanel(),
     pnlNorth = new JPanel(),
     pnlSouth = new JPanel(),
@@ -30,7 +30,7 @@ public class GUI extends JFrame implements ActionListener
     private  JRadioButton SelectO = new JRadioButton("User Plays O", false);
     private ButtonGroup radioGroup;
     private  String startingPlayer= "";
-    final int X = 1600, Y = 960, color = 190; // size of the game window
+    final int X = 800, Y = 480, color = 190; // size of the game window
     private boolean inGame = false;
     private boolean win = false;
     private boolean btnEmptyClicked = false;
@@ -94,12 +94,12 @@ public class GUI extends JFrame implements ActionListener
         mnuStartingPlayer.addActionListener(this);
 
         // setting up the playing field
-        pnlPlayingField.setLayout(new GridLayout(4, 4, 2, 2));
+        pnlPlayingField.setLayout(new GridLayout(3, 3, 2, 2));
         pnlPlayingField.setBackground(Color.black);
-        for(int x=1; x <= 16; ++x)   
+        for(int x=1; x <= 9; ++x)   
         {
             btnEmpty[x] = new JButton();
-            btnEmpty[x].setBackground(new Color(173, 212, 234));
+            btnEmpty[x].setBackground(new Color(220, 220, 220));
             btnEmpty[x].addActionListener(this);
             pnlPlayingField.add(btnEmpty[x]);
             btnEmpty[x].setEnabled(setTableEnabled);
@@ -122,9 +122,9 @@ public class GUI extends JFrame implements ActionListener
         Object source = click.getSource();
 
         // check if a button was clicked on the gameboard
-        for(int currentMove=1; currentMove <= 16; ++currentMove) 
+        for(int currentMove=1; currentMove <= 9; ++currentMove) 
         {
-            if(source == btnEmpty[currentMove] && remainingMoves <= 16)  
+            if(source == btnEmpty[currentMove] && remainingMoves < 10)  
             {
                 btnEmptyClicked = true;
                 BusinessLogic.GetMove(currentMove, remainingMoves, font, 
@@ -255,17 +255,49 @@ public class GUI extends JFrame implements ActionListener
 
         remainingMoves = 1;
 
-        for(int x=1; x <= 16; ++x)   
+        for(int x=1; x <= 9; ++x)   
         {
             btnEmpty[x].setText("");
             btnEmpty[x].setEnabled(setTableEnabled);
         }
-
+        
+       if (CheckWin()){
+           win=true;
+           }
         win = false;        
     }
 
-    private void CheckWin() 
+    private boolean CheckWin() 
     {   
+         int checkHor = 0;
+        int checkVer = 0;
+        for (int i = 0; i < btnEmpty.length; i++) {
+            for (int j = 0; j < btnEmpty.length; j++) {
+                if (board[i][j].equals(" X ")){
+                    checkHor++;
+                }
+                if (board[j][i].equals(" X ")){
+                    checkVer++;
+                }
+                if (checkHor == 3)
+                    return true;
+                if (checkVer == 3)
+                    return true;
+            }
+            checkHor = 0;
+            checkVer = 0;
+        }
+        return false;
         
+    
     }
-}	
+    public void makeBoard(){
+        for(int i =0; i< 4; i++){
+            for(int j=0;j<4; j++){
+                    board[i][j] = btnEmpty[i*3+j].getText();
+                    
+                }
+        }
+    }
+
+}
